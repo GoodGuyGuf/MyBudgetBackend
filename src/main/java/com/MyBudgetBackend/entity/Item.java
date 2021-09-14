@@ -7,7 +7,7 @@ import java.sql.Date;
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Integer id;
 	private String name;
 	private int cost;
 	private Date date;
@@ -16,7 +16,7 @@ public class Item {
     @JoinColumn(name="expense_id")
 	private Expense expense;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -54,5 +54,30 @@ public class Item {
 
     public void setExpense(Expense expense) {
         this.expense = expense;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((this.getId() == null) ? 0 : this.getId().hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Item otherItem = (Item) obj;
+        if (this.getId() == null)
+            if (otherItem.getId() != null)
+                return false;
+            else if (this.getId().equals(otherItem.getId()))
+                return false;
+        return true;
     }
 }

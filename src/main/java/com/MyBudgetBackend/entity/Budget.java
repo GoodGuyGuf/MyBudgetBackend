@@ -7,7 +7,7 @@ import java.util.List;
 public class Budget {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Integer id;
 	private String name;
 	private int amount;
 
@@ -19,7 +19,7 @@ public class Budget {
     @JoinColumn(name="budget_id")
     private List<Expense> expenses;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -57,5 +57,30 @@ public class Budget {
 
     public void setExpenses(List<Expense> expenses) {
         this.expenses = expenses;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((this.getId() == null) ? 0 : this.getId().hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Budget otherBudget = (Budget) obj;
+        if (this.getId() == null)
+            if (otherBudget.getId() != null)
+                return false;
+            else if (this.getId().equals(otherBudget.getId()))
+                return false;
+        return true;
     }
 }
