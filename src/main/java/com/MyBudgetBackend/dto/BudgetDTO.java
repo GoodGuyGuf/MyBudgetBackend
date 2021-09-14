@@ -65,6 +65,7 @@ public class BudgetDTO {
         budget.setId(budgetDTO.getId());
         budget.setName(budgetDTO.getName());
         budget.setAmount(budgetDTO.getAmount());
+        budget.setUser(UserDTO.convertToUser(budgetDTO.getUserDTO()));
         return budget;
     }
 

@@ -68,6 +68,7 @@ public class ItemDTO {
         item.setName(itemDTO.getName());
         item.setCost(itemDTO.getCost());
         item.setDate(itemDTO.getDate());
+        item.setExpense(ExpenseDTO.convertToExpense(itemDTO.getExpenseDTO()));
         return item;
     }
 

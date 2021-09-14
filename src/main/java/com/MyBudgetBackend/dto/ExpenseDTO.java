@@ -1,5 +1,6 @@
 package com.MyBudgetBackend.dto;
 
+import com.MyBudgetBackend.entity.Budget;
 import com.MyBudgetBackend.entity.Expense;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -78,6 +79,7 @@ public class ExpenseDTO {
         expense.setName(expenseDTO.getName());
         expense.setCost(expenseDTO.getCost());
         expense.setDate(expenseDTO.getDate());
+        expense.setBudget(BudgetDTO.convertToBudget(expenseDTO.getBudgetDTO()));
         return expense;
     }
 
