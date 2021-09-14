@@ -1,5 +1,8 @@
 package com.MyBudgetBackend.repository;
 
-public interface ExpenseRepository {
+import com.MyBudgetBackend.entity.Expense;
+import org.springframework.data.repository.CrudRepository;
+
+public interface ExpenseRepository extends CrudRepository<Expense, Integer> {
 
 }
