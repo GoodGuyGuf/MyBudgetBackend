@@ -1,12 +1,19 @@
 package com.MyBudgetBackend.entity;
 
+import javax.persistence.*;
 import java.sql.Date;
 
+@Entity
 public class Item {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
 	private int cost;
 	private Date date;
+
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="expense_id")
 	private Expense expense;
 
     public int getId() {
