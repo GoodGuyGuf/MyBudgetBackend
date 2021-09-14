@@ -1,10 +1,20 @@
 package com.MyBudgetBackend.entity;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
     private String email;
     private String password;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id")
+    private List<Budget> budgets;
 
     public int getId() {
         return id;
@@ -36,5 +46,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Budget> getBudgets() {
+        return budgets;
+    }
+
+    public void setBudgets(List<Budget> budgets) {
+        this.budgets = budgets;
     }
 }
