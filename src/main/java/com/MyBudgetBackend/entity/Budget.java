@@ -1,6 +1,8 @@
 package com.MyBudgetBackend.entity;
 
+import com.MyBudgetBackend.dto.BudgetDTO;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -57,6 +59,22 @@ public class Budget {
 
     public void setExpenses(List<Expense> expenses) {
         this.expenses = expenses;
+    }
+
+    public static BudgetDTO convertBudgetToBudgetDTO(Budget budget) {
+        BudgetDTO budgetDTO = new BudgetDTO();
+        budgetDTO.setId(budget.getId());
+        budgetDTO.setName(budget.getName());
+        budgetDTO.setAmount(budget.getAmount());
+        return budgetDTO;
+    }
+
+    public static List<BudgetDTO> convertBudgetsToBudgetDTOs(List<Budget> budgets) {
+        List<BudgetDTO> budgetDTOs = new ArrayList<>();
+        budgets.forEach(budget -> {
+            budgetDTOs.add(Budget.convertBudgetToBudgetDTO(budget));
+        });
+        return budgetDTOs;
     }
 
     @Override

@@ -1,7 +1,9 @@
 package com.MyBudgetBackend.entity;
 
+import com.MyBudgetBackend.dto.ExpenseDTO;
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -67,6 +69,23 @@ public class Expense {
 
     public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+    public static ExpenseDTO convertExpenseToExpenseDTO(Expense expense) {
+        ExpenseDTO expenseDTO = new ExpenseDTO();
+        expenseDTO.setId(expense.getId());
+        expenseDTO.setName(expense.getName());
+        expenseDTO.setCost(expense.getCost());
+        expenseDTO.setDate(expense.getDate());
+        return expenseDTO;
+    }
+
+    public static List<ExpenseDTO> convertExpensesToExpenseDTOs(List<Expense> expenses) {
+        List<ExpenseDTO> expenseDTOs = new ArrayList<>();
+        expenses.forEach(expense -> {
+            expenseDTOs.add(Expense.convertExpenseToExpenseDTO(expense));
+        });
+        return expenseDTOs;
     }
 
     @Override
