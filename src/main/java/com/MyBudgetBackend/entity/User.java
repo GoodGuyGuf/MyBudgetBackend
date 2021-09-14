@@ -1,5 +1,7 @@
 package com.MyBudgetBackend.entity;
 
+import com.MyBudgetBackend.dto.UserDTO;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -54,6 +56,15 @@ public class User {
 
     public void setBudgets(List<Budget> budgets) {
         this.budgets = budgets;
+    }
+
+    public static UserDTO convertUserToUserDTO(User user) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(user.getId());
+        userDTO.setName(user.getName());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setPassword(user.getPassword());
+        return userDTO;
     }
 
     @Override
