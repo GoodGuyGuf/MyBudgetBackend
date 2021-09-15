@@ -77,6 +77,8 @@ public class Expense {
         expenseDTO.setName(expense.getName());
         expenseDTO.setCost(expense.getCost());
         expenseDTO.setDate(expense.getDate());
+        expenseDTO.setBudgetDTO(Budget.convertBudgetToBudgetDTO(expense.getBudget()));
+        expenseDTO.setItemDTOs(Item.convertItemsToItemDTOs(expense.getItems()));
         return expenseDTO;
     }
 
