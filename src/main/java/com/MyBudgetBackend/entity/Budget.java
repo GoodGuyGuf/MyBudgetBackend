@@ -66,6 +66,8 @@ public class Budget {
         budgetDTO.setId(budget.getId());
         budgetDTO.setName(budget.getName());
         budgetDTO.setAmount(budget.getAmount());
+        budgetDTO.setUserDTO(User.convertUserToUserDTO(budget.getUser()));
+        budgetDTO.setExpenseDTOs(Expense.convertExpensesToExpenseDTOs(budget.getExpenses()));
         return budgetDTO;
     }
 

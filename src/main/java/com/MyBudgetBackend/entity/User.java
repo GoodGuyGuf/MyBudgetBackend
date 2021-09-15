@@ -64,6 +64,7 @@ public class User {
         userDTO.setName(user.getName());
         userDTO.setEmail(user.getEmail());
         userDTO.setPassword(user.getPassword());
+        userDTO.setBudgetDTOs(Budget.convertBudgetsToBudgetDTOs(user.getBudgets()));
         return userDTO;
     }
 
