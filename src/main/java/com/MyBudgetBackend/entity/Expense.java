@@ -1,6 +1,8 @@
 package com.MyBudgetBackend.entity;
 
 import com.MyBudgetBackend.dto.ExpenseDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -15,12 +17,11 @@ public class Expense {
 	private int cost;
 	private Date date;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="budget_id")
 	private Budget budget;
 
-	@OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="expense_id")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "expense", fetch = FetchType.LAZY)
     private List<Item> items;
 
     public Integer getId() {

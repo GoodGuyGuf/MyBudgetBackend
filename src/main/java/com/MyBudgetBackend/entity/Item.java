@@ -15,7 +15,7 @@ public class Item {
 	private int cost;
 	private Date date;
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="expense_id")
 	private Expense expense;
 

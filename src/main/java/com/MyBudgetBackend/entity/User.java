@@ -1,7 +1,6 @@
 package com.MyBudgetBackend.entity;
 
 import com.MyBudgetBackend.dto.UserDTO;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,8 +13,7 @@ public class User {
     private String email;
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name="user_id")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private List<Budget> budgets;
 
     public Integer getId() {
