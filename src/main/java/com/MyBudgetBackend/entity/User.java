@@ -2,15 +2,23 @@ package com.MyBudgetBackend.entity;
 
 import com.MyBudgetBackend.dto.UserDTO;
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotNull
     private String name;
+
+    @NotNull
+    @Email
     private String email;
+
+    @NotNull
     private String password;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
@@ -62,7 +70,6 @@ public class User {
         userDTO.setName(user.getName());
         userDTO.setEmail(user.getEmail());
         userDTO.setPassword(user.getPassword());
-        userDTO.setBudgetDTOs(Budget.convertBudgetsToBudgetDTOs(user.getBudgets()));
         return userDTO;
     }
 
