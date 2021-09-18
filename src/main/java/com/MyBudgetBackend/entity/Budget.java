@@ -1,18 +1,21 @@
 package com.MyBudgetBackend.entity;
 
 import com.MyBudgetBackend.dto.BudgetDTO;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Budget {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+
+    @NotNull
 	private String name;
+
+    @NotNull
 	private int amount;
 
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -68,7 +71,6 @@ public class Budget {
         budgetDTO.setName(budget.getName());
         budgetDTO.setAmount(budget.getAmount());
         budgetDTO.setUserDTO(User.convertUserToUserDTO(budget.getUser()));
-        budgetDTO.setExpenseDTOs(Expense.convertExpensesToExpenseDTOs(budget.getExpenses()));
         return budgetDTO;
     }
 
