@@ -25,20 +25,19 @@ public class BudgetAPI {
     @PostMapping(value = "/budgets")
     public ResponseEntity<String> createBudget(@RequestBody BudgetDTO budgetDTO) {
         budgetService.createBudget(budgetDTO);
-        return new ResponseEntity<>("CREATE: SUCCESS", HttpStatus.CREATED);
+        return new ResponseEntity<>("CREATE BUDGET: SUCCESS", HttpStatus.CREATED);
     }
-
 
     @PutMapping(value = "/budgets/{id}")
     public ResponseEntity<String> updateBudget(@RequestBody BudgetDTO budgetDTO) {
         budgetService.updateBudget(budgetDTO);
-        return new ResponseEntity<>("UPDATE: SUCCESS", HttpStatus.OK);
+        return new ResponseEntity<>("UPDATE BUDGET: SUCCESS", HttpStatus.OK);
     }
 
 
     @DeleteMapping(value = "/budgets/{id}")
     public ResponseEntity<String> deleteBudget(@RequestBody BudgetDTO budgetDTO) {
         budgetService.deleteBudget(budgetDTO.getId());
-        return new ResponseEntity<>("DELETE: SUCCESS", HttpStatus.OK);
+        return new ResponseEntity<>("DELETE BUDGET: SUCCESS", HttpStatus.OK);
     }
 }
