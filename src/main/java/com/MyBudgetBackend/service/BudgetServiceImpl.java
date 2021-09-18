@@ -2,7 +2,9 @@ package com.MyBudgetBackend.service;
 
 import com.MyBudgetBackend.dto.BudgetDTO;
 import com.MyBudgetBackend.entity.Budget;
+import com.MyBudgetBackend.entity.User;
 import com.MyBudgetBackend.repository.BudgetRepository;
+import com.MyBudgetBackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
@@ -17,6 +19,9 @@ public class BudgetServiceImpl implements BudgetService {
     @Autowired
     BudgetRepository budgetRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     @Override
     public List<BudgetDTO> getAllBudgets() {
         Iterable<Budget> iterableBudgets = budgetRepository.findAll();
@@ -28,23 +33,30 @@ public class BudgetServiceImpl implements BudgetService {
 
     @Override
     public void createBudget(BudgetDTO budgetDTO) {
-        Budget budget = BudgetDTO.convertToBudget(budgetDTO);
-        budgetRepository.save(budget);
+        Optional<User> user = userRepository.findById(budgetDTO.getUserDTO().getId());
+        if(user.isPresent()) {
+            budgetDTO.setUserDTO(User.convertUserToUserDTO(user.get()));
+            Budget budget = BudgetDTO.convertToBudget(budgetDTO);
+            budgetRepository.save(budget);
+        }
     }
 
     @Override
     public void updateBudget(BudgetDTO budgetDTO) {
-        Optional<Budget> optionalBudget = budgetRepository.findById(budgetDTO.getId());
-        Budget budget = optionalBudget.get();
-        budget.setName(budgetDTO.getName());
-        budget.setAmount(budgetDTO.getAmount());
-        budgetRepository.save(budget);
+        Optional<Budget> budget = budgetRepository.findById(budgetDTO.getId());
+        if (budget.isPresent()) {
+            Budget newBudget = budget.get();
+            newBudget.setName(budgetDTO.getName());
+            newBudget.setAmount(budgetDTO.getAmount());
+            budgetRepository.save(newBudget);
+        }
     }
 
     @Override
     public void deleteBudget(Integer budgetID) {
-        Optional<Budget> optionalBudget = budgetRepository.findById(budgetID);
-        optionalBudget.orElseThrow();
-        budgetRepository.deleteById(budgetID);
+        Optional<Budget> budget = budgetRepository.findById(budgetID);
+        if(budget.isPresent()) {
+            budgetRepository.deleteById(budgetID);
+        }
     }
 }
