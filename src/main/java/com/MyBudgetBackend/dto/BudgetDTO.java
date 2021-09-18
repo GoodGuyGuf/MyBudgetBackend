@@ -1,21 +1,13 @@
 package com.MyBudgetBackend.dto;
 
 import com.MyBudgetBackend.entity.Budget;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BudgetDTO {
     private Integer id;
-
-    @NotNull
     private String name;
-
-    @NotNull
     private int amount;
-
-    @Valid
     private UserDTO userDTO;
 
     private List<ExpenseDTO> expenseDTOs;
@@ -62,7 +54,6 @@ public class BudgetDTO {
 
     public static Budget convertToBudget(BudgetDTO budgetDTO) {
         Budget budget = new Budget();
-        budget.setId(budgetDTO.getId());
         budget.setName(budgetDTO.getName());
         budget.setAmount(budgetDTO.getAmount());
         budget.setUser(UserDTO.convertToUser(budgetDTO.getUserDTO()));

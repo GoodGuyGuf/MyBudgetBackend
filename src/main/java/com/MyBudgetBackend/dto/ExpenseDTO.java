@@ -1,26 +1,15 @@
 package com.MyBudgetBackend.dto;
 
-import com.MyBudgetBackend.entity.Budget;
 import com.MyBudgetBackend.entity.Expense;
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExpenseDTO {
     private Integer id;
-
-    @NotNull
     private String name;
-
-    @NotNull
     private int cost;
-
-    @NotNull
     private Date date;
-
-    @Valid
     private BudgetDTO budgetDTO;
 
     private List<ItemDTO> itemDTOs;
