@@ -1,9 +1,8 @@
 package com.MyBudgetBackend.entity;
 
 import com.MyBudgetBackend.dto.ExpenseDTO;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +10,16 @@ import java.util.List;
 @Entity
 public class Expense {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+
+    @NotNull
 	private String name;
+
+    @NotNull
 	private int cost;
+
+    @NotNull
 	private Date date;
 
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -79,7 +84,6 @@ public class Expense {
         expenseDTO.setCost(expense.getCost());
         expenseDTO.setDate(expense.getDate());
         expenseDTO.setBudgetDTO(Budget.convertBudgetToBudgetDTO(expense.getBudget()));
-        expenseDTO.setItemDTOs(Item.convertItemsToItemDTOs(expense.getItems()));
         return expenseDTO;
     }
 
