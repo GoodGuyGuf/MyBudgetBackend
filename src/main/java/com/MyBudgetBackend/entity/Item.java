@@ -2,6 +2,7 @@ package com.MyBudgetBackend.entity;
 
 import com.MyBudgetBackend.dto.ItemDTO;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +10,16 @@ import java.util.List;
 @Entity
 public class Item {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+
+    @NotNull
 	private String name;
+
+    @NotNull
 	private int cost;
+
+    @NotNull
 	private Date date;
 
 	@ManyToOne(cascade = CascadeType.ALL)
