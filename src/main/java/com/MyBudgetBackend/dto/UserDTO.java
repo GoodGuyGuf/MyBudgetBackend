@@ -1,21 +1,12 @@
 package com.MyBudgetBackend.dto;
 
 import com.MyBudgetBackend.entity.User;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class UserDTO {
     private Integer id;
-
-    @NotNull(message = "{user.name.absent}")
     private String name;
-
-    @Email(message = "{user.email.invalid}")
-    @NotNull(message = "{user.email.absent}")
     private String email;
-
-    @NotNull(message = "{user.password.absent}")
     private String password;
 
     private List<BudgetDTO> budgetDTOs;
@@ -62,7 +53,6 @@ public class UserDTO {
 
     public static User convertToUser(UserDTO userDTO) {
         User user = new User();
-        user.setId(userDTO.getId());
         user.setName(userDTO.getName());
         user.setEmail(userDTO.getEmail());
         user.setPassword(userDTO.getPassword());
