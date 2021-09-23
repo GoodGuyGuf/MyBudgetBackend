@@ -4,6 +4,8 @@ target/
 src/main/**/target/
 src/main/resources/application.properties
 src/test/**/target/
+.DS_Store
+src/.DS_Store
 
 # Compiled class file
 *.class
